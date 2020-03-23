@@ -33,6 +33,10 @@ class UserGroup
      */
     private $tasks;
 
+    public function __toString() {
+        return "$this->name";
+    }
+
     public function __construct()
     {
         $this->users = new ArrayCollection();

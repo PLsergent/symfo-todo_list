@@ -22,6 +22,16 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstname;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -51,6 +61,10 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity="App\Entity\UserGroup", inversedBy="users")
      */
     private $userGroups;
+
+    public function __toString() {
+        return "$this->name $this->firstname";
+    }
 
     public function __construct()
     {
@@ -216,6 +230,30 @@ class User implements UserInterface
         if ($this->userGroups->contains($userGroup)) {
             $this->userGroups->removeElement($userGroup);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
 
         return $this;
     }

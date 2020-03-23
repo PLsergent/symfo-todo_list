@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Todo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TodoType extends AbstractType
@@ -16,7 +18,10 @@ class TodoType extends AbstractType
             ->add('description')
             ->add('priority')
             ->add('status')
-            ->add('deadline')
+            ->add('deadline', DateType::Class, [
+                'widget' => 'choice',
+                'data' => new \DateTime()
+            ])
             ->add('done')
             ->add('user')
             ->add('categories')

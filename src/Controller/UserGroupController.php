@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/user/group")
+ * @Route("/admin/usergroup")
  */
 class UserGroupController extends AbstractController
 {
@@ -49,7 +49,7 @@ class UserGroupController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_group_show", requirements={"id":"\d+"}, methods={"GET"})
+     * @Route("/{id}", name="user_group_show", methods={"GET"})
      */
     public function show(UserGroup $userGroup): Response
     {
@@ -59,7 +59,7 @@ class UserGroupController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_group_edit", requirements={"id":"\d+"}, methods={"GET","POST"})
+     * @Route("/{id}/edit", name="user_group_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UserGroup $userGroup): Response
     {
@@ -79,7 +79,7 @@ class UserGroupController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_group_delete", requirements={"id":"\d+"}, methods={"DELETE"})
+     * @Route("/{id}", name="user_group_delete", methods={"DELETE"})
      */
     public function delete(Request $request, UserGroup $userGroup): Response
     {

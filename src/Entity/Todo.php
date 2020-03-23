@@ -58,6 +58,10 @@ class Todo
      */
     private $categories;
 
+    public function __toString() {
+        return "$this->name";
+    }
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
