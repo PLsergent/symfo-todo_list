@@ -16,17 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminTodoController extends AbstractController
 {
     /**
-     * @Route("/", name="todo_index", methods={"GET"})
+     * @Route("/", name="admin_todo_index", methods={"GET"})
      */
     public function index(TodoRepository $todoRepository): Response
     {
-        return $this->render('todo/index.html.twig', [
+        return $this->render('admin/todo/index.html.twig', [
             'todos' => $todoRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="todo_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_todo_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -42,24 +42,24 @@ class AdminTodoController extends AbstractController
             return $this->redirectToRoute('todo_index');
         }
 
-        return $this->render('todo/new.html.twig', [
+        return $this->render('admin/todo/new.html.twig', [
             'todo' => $todo,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="todo_show", methods={"GET"})
+     * @Route("/{id}", name="admin_todo_show", methods={"GET"})
      */
     public function show(Todo $todo): Response
     {
-        return $this->render('todo/show.html.twig', [
+        return $this->render('admin/todo/show.html.twig', [
             'todo' => $todo,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="todo_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_todo_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Todo $todo): Response
     {
@@ -72,14 +72,14 @@ class AdminTodoController extends AbstractController
             return $this->redirectToRoute('todo_index');
         }
 
-        return $this->render('todo/edit.html.twig', [
+        return $this->render('admin/todo/edit.html.twig', [
             'todo' => $todo,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="todo_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_todo_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Todo $todo): Response
     {

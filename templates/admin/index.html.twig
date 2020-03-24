@@ -8,7 +8,7 @@
     <h1>Admin interface</h1>
 
     {% for entity in entities %}
-        <h4><a href="{{ path(entity ~ '_index') }}">{{ entity|capitalize }}</a></h4>
+        <h4><a href="{{ path('admin_' ~ entity ~ '_index') }}">{{ entity|capitalize }}</a></h4>
     {% endfor %}
 </div>
 {% endblock %}

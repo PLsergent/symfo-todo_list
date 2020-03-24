@@ -16,17 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminUserGroupController extends AbstractController
 {
     /**
-     * @Route("/", name="user_group_index", methods={"GET"})
+     * @Route("/", name="admin_user_group_index", methods={"GET"})
      */
     public function index(UserGroupRepository $userGroupRepository): Response
     {
-        return $this->render('user_group/index.html.twig', [
+        return $this->render('admin/user_group/index.html.twig', [
             'user_groups' => $userGroupRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="user_group_new", methods={"GET","POST"})
+     * @Route("/new", name="admin_user_group_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -42,24 +42,24 @@ class AdminUserGroupController extends AbstractController
             return $this->redirectToRoute('user_group_index');
         }
 
-        return $this->render('user_group/new.html.twig', [
+        return $this->render('admin/user_group/new.html.twig', [
             'user_group' => $userGroup,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="user_group_show", methods={"GET"})
+     * @Route("/{id}", name="admin_user_group_show", methods={"GET"})
      */
     public function show(UserGroup $userGroup): Response
     {
-        return $this->render('user_group/show.html.twig', [
+        return $this->render('admin/user_group/show.html.twig', [
             'user_group' => $userGroup,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="user_group_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin_user_group_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UserGroup $userGroup): Response
     {
@@ -72,14 +72,14 @@ class AdminUserGroupController extends AbstractController
             return $this->redirectToRoute('user_group_index');
         }
 
-        return $this->render('user_group/edit.html.twig', [
+        return $this->render('admin/user_group/edit.html.twig', [
             'user_group' => $userGroup,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="user_group_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin_user_group_delete", methods={"DELETE"})
      */
     public function delete(Request $request, UserGroup $userGroup): Response
     {
