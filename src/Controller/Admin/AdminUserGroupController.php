@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\UserGroup;
 use App\Form\UserGroupType;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("admin/usergroup")
  */
-class UserGroupController extends AbstractController
+class AdminUserGroupController extends AbstractController
 {
     /**
      * @Route("/", name="user_group_index", methods={"GET"})

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/category")
  */
-class CategoryController extends AbstractController
+class AdminCategoryController extends AbstractController
 {
     /**
      * @Route("/", name="category_index", methods={"GET"})

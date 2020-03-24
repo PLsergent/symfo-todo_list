@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Project;
 use App\Form\ProjectType;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/project")
  */
-class ProjectController extends AbstractController
+class AdminProjectController extends AbstractController
 {
     /**
      * @Route("/", name="project_index", methods={"GET"})

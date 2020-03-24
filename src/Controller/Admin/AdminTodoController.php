@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Todo;
 use App\Form\TodoType;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/todo")
  */
-class TodoController extends AbstractController
+class AdminTodoController extends AbstractController
 {
     /**
      * @Route("/", name="todo_index", methods={"GET"})
