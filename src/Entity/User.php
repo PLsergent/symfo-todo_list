@@ -62,6 +62,11 @@ class User implements UserInterface
      */
     private $userGroups;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="manager")
+     */
+    private $projects;
+
     public function __toString() {
         return "$this->name $this->firstname";
     }
@@ -71,6 +76,7 @@ class User implements UserInterface
         $this->todos = new ArrayCollection();
         $this->tasks = new ArrayCollection();
         $this->userGroups = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -254,6 +260,37 @@ class User implements UserInterface
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setManager($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getManager() === $this) {
+                $project->setManager(null);
+            }
+        }
 
         return $this;
     }

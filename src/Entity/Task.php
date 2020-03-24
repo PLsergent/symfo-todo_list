@@ -63,8 +63,13 @@ class Task
      */
     private $categories;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="tasks")
+     */
+    private $project;
+
     public function __toString() {
-        return "$this->name";
+        return $this->name;
     }
 
     public function __construct()
@@ -212,6 +217,18 @@ class Task
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
         }
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
 
         return $this;
     }

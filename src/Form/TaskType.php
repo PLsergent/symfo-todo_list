@@ -5,6 +5,8 @@ namespace App\Form;
 use App\Entity\Task;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TaskType extends AbstractType
@@ -16,11 +18,15 @@ class TaskType extends AbstractType
             ->add('description')
             ->add('priority')
             ->add('status')
-            ->add('deadline')
+            ->add('deadline', DateType::Class, [
+                'widget' => 'choice',
+                'data' => new \DateTime()
+            ])
             ->add('done')
             ->add('users')
             ->add('userGroup')
             ->add('categories')
+            ->add('project')
         ;
     }
 

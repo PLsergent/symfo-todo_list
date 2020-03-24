@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserGroupRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
  */
-class UserGroup
+class Project
 {
     /**
      * @ORM\Id()
@@ -24,19 +24,19 @@ class UserGroup
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="userGroups")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projects")
      */
-    private $users;
+    private $manager;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="userGroup")
+     * @ORM\OneToMany(targetEntity="App\Entity\UserGroup", mappedBy="project")
+     */
+    private $userGroups;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="project")
      */
     private $tasks;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="userGroups")
-     */
-    private $project;
 
     public function __toString() {
         return $this->name;
@@ -44,7 +44,7 @@ class UserGroup
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->userGroups = new ArrayCollection();
         $this->tasks = new ArrayCollection();
     }
 
@@ -65,29 +65,44 @@ class UserGroup
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function getManager(): ?User
     {
-        return $this->users;
+        return $this->manager;
     }
 
-    public function addUser(User $user): self
+    public function setManager(?User $manager): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addUserGroup($this);
+        $this->manager = $manager;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserGroup[]
+     */
+    public function getUserGroups(): Collection
+    {
+        return $this->userGroups;
+    }
+
+    public function addUserGroup(UserGroup $userGroup): self
+    {
+        if (!$this->userGroups->contains($userGroup)) {
+            $this->userGroups[] = $userGroup;
+            $userGroup->setProject($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUserGroup(UserGroup $userGroup): self
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removeUserGroup($this);
+        if ($this->userGroups->contains($userGroup)) {
+            $this->userGroups->removeElement($userGroup);
+            // set the owning side to null (unless already changed)
+            if ($userGroup->getProject() === $this) {
+                $userGroup->setProject(null);
+            }
         }
 
         return $this;
@@ -105,7 +120,7 @@ class UserGroup
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks[] = $task;
-            $task->setUserGroup($this);
+            $task->setProject($this);
         }
 
         return $this;
@@ -116,22 +131,10 @@ class UserGroup
         if ($this->tasks->contains($task)) {
             $this->tasks->removeElement($task);
             // set the owning side to null (unless already changed)
-            if ($task->getUserGroup() === $this) {
-                $task->setUserGroup(null);
+            if ($task->getProject() === $this) {
+                $task->setProject(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getProject(): ?Project
-    {
-        return $this->project;
-    }
-
-    public function setProject(?Project $project): self
-    {
-        $this->project = $project;
 
         return $this;
     }

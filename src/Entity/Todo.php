@@ -59,7 +59,7 @@ class Todo
     private $categories;
 
     public function __toString() {
-        return "$this->name";
+        return $this->name;
     }
 
     public function __construct()
