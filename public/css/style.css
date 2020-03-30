@@ -2031,6 +2031,7 @@ textarea.form-control {
       margin-bottom: 0; } }
 
 .btn {
+  cursor: pointer;
   display: inline-block;
   font-weight: 400;
   color: #212529;

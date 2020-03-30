@@ -24,6 +24,11 @@ class TaskRepository extends ServiceEntityRepository
         return $this->findBy([], ['deadline' => 'ASC']);
     }
 
+    public function findAllDoneSortByDate()
+    {
+        return $this->findBy(['done' => 'true'], ['deadline' => 'ASC']);
+    }
+
     // /**
     //  * @return Task[] Returns an array of Task objects
     //  */

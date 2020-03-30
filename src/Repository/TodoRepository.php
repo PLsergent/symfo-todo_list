@@ -24,6 +24,11 @@ class TodoRepository extends ServiceEntityRepository
         return $this->findBy([], ['deadline' => 'ASC']);
     }
 
+    public function findAllDoneSortByDate()
+    {
+        return $this->findBy(['done' => 'true'], ['deadline' => 'ASC']);
+    }
+
     // /**
     //  * @return Todo[] Returns an array of Todo objects
     //  */

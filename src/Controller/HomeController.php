@@ -17,7 +17,9 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'todos' => $todoRepository->findAllSortByDate(),
-            'tasks' => $taskRepository->findAllSortByDate()
+            'tasks' => $taskRepository->findAllSortByDate(),
+            'todos_done' => $todoRepository->findAllDoneSortByDate(),
+            'tasks_done' => $taskRepository->findAllDoneSortByDate(),
         ]);
     }
 }
