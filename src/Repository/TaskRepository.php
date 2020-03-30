@@ -19,6 +19,11 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+    public function findAllSortByDate()
+    {
+        return $this->findBy([], ['deadline' => 'ASC']);
+    }
+
     // /**
     //  * @return Task[] Returns an array of Task objects
     //  */

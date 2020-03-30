@@ -39,7 +39,7 @@ class AdminUserGroupController extends AbstractController
             $entityManager->persist($userGroup);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_group_index');
+            return $this->redirectToRoute('admin_user_group_index');
         }
 
         return $this->render('admin/user_group/new.html.twig', [
@@ -69,7 +69,7 @@ class AdminUserGroupController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_group_index');
+            return $this->redirectToRoute('admin_user_group_index');
         }
 
         return $this->render('admin/user_group/edit.html.twig', [
@@ -89,6 +89,6 @@ class AdminUserGroupController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_group_index');
+        return $this->redirectToRoute('admin_user_group_index');
     }
 }

@@ -16,13 +16,17 @@ class TaskType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('priority')
+            ->add('priority', ChoiceType::Class, [
+                'choices' => [
+                    'High' => 'High',
+                    'Medium' => 'Medium',
+                    'Low' => 'Low',
+                ]
+            ])
             ->add('status')
             ->add('deadline', DateType::Class, [
-                'widget' => 'choice',
-                'data' => new \DateTime()
+                'widget' => 'choice'
             ])
-            ->add('done')
             ->add('users')
             ->add('userGroup')
             ->add('categories')

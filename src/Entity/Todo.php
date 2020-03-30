@@ -65,6 +65,9 @@ class Todo
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->deadline = new \DateTime();
+        $this->done = false;
+        $this->status = "New";
     }
 
     public function getId(): ?int

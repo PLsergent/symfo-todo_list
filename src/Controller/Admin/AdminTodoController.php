@@ -39,7 +39,7 @@ class AdminTodoController extends AbstractController
             $entityManager->persist($todo);
             $entityManager->flush();
 
-            return $this->redirectToRoute('todo_index');
+            return $this->redirectToRoute('admin_todo_index');
         }
 
         return $this->render('admin/todo/new.html.twig', [
@@ -69,7 +69,7 @@ class AdminTodoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('todo_index');
+            return $this->redirectToRoute('admin_todo_index');
         }
 
         return $this->render('admin/todo/edit.html.twig', [
@@ -89,6 +89,6 @@ class AdminTodoController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('todo_index');
+        return $this->redirectToRoute('admin_todo_index');
     }
 }

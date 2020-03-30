@@ -39,7 +39,7 @@ class AdminProjectController extends AbstractController
             $entityManager->persist($project);
             $entityManager->flush();
 
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('admin_project_index');
         }
 
         return $this->render('admin/project/new.html.twig', [
@@ -69,7 +69,7 @@ class AdminProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('admin_project_index');
         }
 
         return $this->render('admin/project/edit.html.twig', [
@@ -89,6 +89,6 @@ class AdminProjectController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('project_index');
+        return $this->redirectToRoute('admin_project_index');
     }
 }

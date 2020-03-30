@@ -6,4 +6,71 @@
 
 <h1>TodoList</h1>
 <h2 class="lead">A lightweight app to keep track of your tasks.</h2>
+
+<h3 class="mt-5 text-info">Todos</h3>
+
+<table class="table table-striped" id="todos">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Deadline</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for todo in todos %}
+        <tr>
+            <td>{{ todo.name }}</td>
+            <td class="text-truncate d-inline-block"  style="max-width: 200px;">{{ todo.description }}</td>
+            <td>{{ todo.priority }}</td>
+            <td>{{ todo.status }}</td>
+            <td>{{ todo.deadline ? todo.deadline|date('d-m-Y') : '' }}</td>
+            <td>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="8">No todos found, please create one.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+
+<h3 class="text-info">Tasks</h3>
+
+<table class="table table-striped nowrap" id="tasks">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Deadline</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+        <tr>
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.priority }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.deadline ? task.deadline|date('d-m-Y') : '' }}</td>
+            <td>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="8">No todos found, please create one.</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

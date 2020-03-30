@@ -76,6 +76,9 @@ class Task
     {
         $this->users = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->deadline = new \DateTime();
+        $this->done = false;
+        $this->status = "New";
     }
 
     public function getId(): ?int
