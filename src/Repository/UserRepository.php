@@ -36,6 +36,42 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function getCurrentTodosSortByDate(User $user)
+    {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        return $user->getTodosCurrent();
+    }
+
+    public function getCurrentTasksSortByDate(User $user)
+    {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        return $user->getTasks();
+    }
+
+    public function getDoneTodosSortByDate(User $user)
+    {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        return $user->getTodosDone();
+    }
+
+    public function getDoneTasksSortByDate(User $user)
+    {
+        if (!$user instanceof User) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+        }
+
+        return $user->getTasksDone();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

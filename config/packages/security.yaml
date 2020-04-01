@@ -35,11 +35,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: '^/admin', roles: ROLE_ADMIN }
-        - { path: '^/profile', roles: ROLE_USER }
         - { path: '^/login', roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: '^/todo', roles: ROLE_USER }
-        - { path: '^/task', roles: ROLE_USER }
-        - { path: '^/category', roles: ROLE_USER }
-        - { path: '^/project', roles: ROLE_USER }
-        - { path: '/', roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
+        - { path: '^/', roles: ROLE_USER }

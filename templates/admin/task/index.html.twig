@@ -15,6 +15,9 @@
                 <th>Status</th>
                 <th>Deadline</th>
                 <th>Done</th>
+                <th>User</th>
+                <th>Categories</th>
+                <th>Project</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,6 +31,9 @@
                 <td>{{ task.status }}</td>
                 <td>{{ task.deadline ? task.deadline|date('Y-m-d') : '' }}</td>
                 <td>{{ task.done ? 'Yes' : 'No' }}</td>
+                <td>Array</td>
+                <td>Array</td>
+                <td>{{ task.project }}</td>
                 <td>
                     <a href="{{ path('admin_task_show', {'id': task.id}) }}">show</a>
                     <a href="{{ path('admin_task_edit', {'id': task.id}) }}">edit</a>

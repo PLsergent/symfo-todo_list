@@ -15,6 +15,8 @@
                 <th>Status</th>
                 <th>Deadline</th>
                 <th>Done</th>
+                <th>User</th>
+                <th>Categories</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,6 +30,8 @@
                 <td>{{ todo.status }}</td>
                 <td>{{ todo.deadline ? todo.deadline|date('Y-m-d') : '' }}</td>
                 <td>{{ todo.done ? 'Yes' : 'No' }}</td>
+                <td>{{ todo.user }}</td>
+                <td>Array</td>
                 <td>
                     <a href="{{ path('admin_todo_show', {'id': todo.id}) }}">show</a>
                     <a href="{{ path('admin_todo_edit', {'id': todo.id}) }}">edit</a>

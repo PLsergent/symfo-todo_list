@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\TodoRepository;
-use App\Repository\TaskRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,14 +11,17 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(TodoRepository $todoRepository, TaskRepository $taskRepository)
+    public function index(UserRepository $userRepository)
     {
+        $user = $this->get('security.token_storage')
+                    ->getToken()
+                    ->getUser();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'todos' => $todoRepository->findAllSortByDate(),
-            'tasks' => $taskRepository->findAllSortByDate(),
-            'todos_done' => $todoRepository->findAllDoneSortByDate(),
-            'tasks_done' => $taskRepository->findAllDoneSortByDate(),
+            'todos' => $userRepository->getCurrentTodosSortByDate($user),
+            'tasks' => $userRepository->getCurrentTasksSortByDate($user),
+            'todos_done' => $userRepository->getDoneTodosSortByDate($user),
+            'tasks_done' => $userRepository->getDoneTasksSortByDate($user),
         ]);
     }
 }

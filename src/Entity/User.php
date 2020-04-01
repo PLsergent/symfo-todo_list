@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Entity\Todo;
+use App\Entity\Task; 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -49,11 +51,13 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Todo", mappedBy="user")
+     * @ORM\OrderBy({"deadline" = "ASC", "id" = "DESC"})
      */
     private $todos;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Task", inversedBy="users")
+     * @ORM\OrderBy({"deadline" = "ASC", "id" = "DESC"})
      */
     private $tasks;
 
@@ -165,6 +169,30 @@ class User implements UserInterface
         return $this->todos;
     }
 
+    public function getTodosCurrent()
+    {
+        $todos = [];
+        $allTodos = $this->getTodos();
+        foreach ($allTodos as $td) {
+            if (!$td->getDone()) {
+                $todos[] = $td;
+            }
+        }
+        return $todos;
+    }
+
+    public function getTodosDone()
+    {
+        $todosDone = [];
+        $allTodos = $this->getTodos();
+        foreach ($allTodos as $td) {
+            if ($td->getDone()) {
+                $todosDone[] = $td;
+            }
+        }
+        return $todosDone;
+    }
+
     public function addTodo(Todo $todo): self
     {
         if (!$this->todos->contains($todo)) {
@@ -194,6 +222,30 @@ class User implements UserInterface
     public function getTasks(): Collection
     {
         return $this->tasks;
+    }
+
+    public function getTasksCurrent()
+    {
+        $tasks = [];
+        $allTasks = $this->getTasks();
+        foreach ($allTasks as $td) {
+            if (!$td->getDone()) {
+                $tasks[] = $td;
+            }
+        }
+        return $tasks;
+    }
+
+    public function getTasksDone()
+    {
+        $tasksDone = [];
+        $allTasks = $this->getTasks();
+        foreach ($allTasks as $td) {
+            if ($td->getDone()) {
+                $tasksDone[] = $td;
+            }
+        }
+        return $tasksDone;
     }
 
     public function addTask(Task $task): self
