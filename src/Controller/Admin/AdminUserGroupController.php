@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\UserGroup;
-use App\Form\UserGroupType;
+use App\Form\Admin\AdminUserGroupType;
 use App\Repository\UserGroupRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class AdminUserGroupController extends AbstractController
     public function new(Request $request): Response
     {
         $userGroup = new UserGroup();
-        $form = $this->createForm(UserGroupType::class, $userGroup);
+        $form = $this->createForm(AdminUserGroupType::class, $userGroup);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class AdminUserGroupController extends AbstractController
      */
     public function edit(Request $request, UserGroup $userGroup): Response
     {
-        $form = $this->createForm(UserGroupType::class, $userGroup);
+        $form = $this->createForm(AdminUserGroupType::class, $userGroup);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

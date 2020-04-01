@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Admin;
 
 use App\Entity\Todo;
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TodoType extends AbstractType
+class AdminTodoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,6 +33,7 @@ class TodoType extends AbstractType
             ->add('deadline', DateType::Class, [
                 'widget' => 'choice'
             ])
+            ->add('user')
             ->add('categories')
         ;
     }

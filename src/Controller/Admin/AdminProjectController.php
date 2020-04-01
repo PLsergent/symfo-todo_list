@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Project;
-use App\Form\ProjectType;
+use App\Form\Admin\AdminProjectType;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class AdminProjectController extends AbstractController
     public function new(Request $request): Response
     {
         $project = new Project();
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm(AdminProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class AdminProjectController extends AbstractController
      */
     public function edit(Request $request, Project $project): Response
     {
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm(AdminProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

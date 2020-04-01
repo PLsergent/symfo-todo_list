@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Task;
-use App\Form\TaskType;
+use App\Form\Admin\AdminTaskType;
 use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class AdminTaskController extends AbstractController
     public function new(Request $request): Response
     {
         $task = new Task();
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this->createForm(AdminTaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class AdminTaskController extends AbstractController
      */
     public function edit(Request $request, Task $task): Response
     {
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this->createForm(AdminTaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

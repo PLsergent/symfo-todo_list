@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Todo;
-use App\Form\TodoType;
+use App\Form\Admin\AdminTodoType;
 use App\Repository\TodoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class AdminTodoController extends AbstractController
     public function new(Request $request): Response
     {
         $todo = new Todo();
-        $form = $this->createForm(TodoType::class, $todo);
+        $form = $this->createForm(AdminTodoType::class, $todo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class AdminTodoController extends AbstractController
      */
     public function edit(Request $request, Todo $todo): Response
     {
-        $form = $this->createForm(TodoType::class, $todo);
+        $form = $this->createForm(AdminTodoType::class, $todo);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
