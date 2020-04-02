@@ -24,11 +24,34 @@ class TodoController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id}/done", name="todo_done", methods={"POST"})
+     */
+    public function complete(Todo $todo): Response
+    {
+        if (!$todo->getDone()) {
+            $todo->setDone(true);
+            $this->getDoctrine()->getManager()->flush();
+        }
+        return new Response();
+    }
 
     /**
-     * @Route("/{id}/edit", name="todo_edit", methods={"GET","POST"})
+     * @Route("/{id}/restore", name="todo_restore", methods={"POST"})
      */
-    public function edit(Request $request, Todo $todo): Response
+    public function restore(Todo $todo): Response
+    {
+        if ($todo->getDone()) {
+            $todo->setDone(false);
+            $this->getDoctrine()->getManager()->flush();
+        }
+        return new Response();
+    }
+
+    /**
+     * @Route("/{id}/edit/{redirect}", name="todo_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Todo $todo, string $redirect): Response
     {
         $form = $this->createForm(TodoType::class, $todo);
         $form->handleRequest($request);
@@ -36,11 +59,16 @@ class TodoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('todo_index');
+            $this->addFlash(
+                'success',
+                'Todo updated!'
+            );
+            return $this->redirectToRoute($redirect);
         }
 
         return $this->render('todo/form/edit.html.twig', [
             'todo' => $todo,
+            'redirect' => $redirect,
             'form' => $form->createView(),
         ]);
     }
