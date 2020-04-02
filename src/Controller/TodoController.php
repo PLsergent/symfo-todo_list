@@ -72,4 +72,21 @@ class TodoController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{id}/delete/", name="todo_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Todo $todo): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($todo);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'warning',
+            'Todo deleted!'
+        );
+
+        return new Response();
+    }
 }

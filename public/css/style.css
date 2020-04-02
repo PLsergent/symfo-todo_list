@@ -1338,11 +1338,12 @@ pre {
   .table th,
   .table td {
     padding: 0.75rem;
-    vertical-align: top;
+    vertical-align: middle;
     border-top: 1px solid #dee2e6; }
   .table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6; }
+    vertical-align: middle !important;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600 !important; }
   .table tbody + tbody {
     border-top: 2px solid #dee2e6; }
 
@@ -2478,7 +2479,7 @@ fieldset:disabled a.btn {
 
 .btn-sm, .btn-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
+  font-size: 0.98rem;
   line-height: 1.5;
   border-radius: 0.2rem; }
 
@@ -8135,7 +8136,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 body {
   font-family: "Poppins", Arial, sans-serif;
-  font-size: 14px;
+  font-size: 0.98rem;
   line-height: 1.8;
   font-weight: normal;
   background: #fafafa;
@@ -8316,7 +8317,7 @@ a[data-toggle="collapse"] {
   height: 40px !important;
   background: #fff;
   color: #000;
-  font-size: 13px;
+  font-size: 14px;
   border-radius: 4px;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;

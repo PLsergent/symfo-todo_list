@@ -172,7 +172,7 @@ class User implements UserInterface
     public function getTodosCurrent()
     {
         $todos = [];
-        $allTodos = $this->getTodos();
+        $allTodos = $this->todos;
         foreach ($allTodos as $td) {
             if (!$td->getDone()) {
                 $todos[] = $td;
@@ -184,7 +184,7 @@ class User implements UserInterface
     public function getTodosDone()
     {
         $todosDone = [];
-        $allTodos = $this->getTodos();
+        $allTodos = $this->todos;
         foreach ($allTodos as $td) {
             if ($td->getDone()) {
                 $todosDone[] = $td;
@@ -227,10 +227,10 @@ class User implements UserInterface
     public function getTasksCurrent()
     {
         $tasks = [];
-        $allTasks = $this->getTasks();
-        foreach ($allTasks as $td) {
-            if (!$td->getDone()) {
-                $tasks[] = $td;
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if (!$tsk->getDone()) {
+                $tasks[] = $tsk;
             }
         }
         return $tasks;
@@ -239,10 +239,10 @@ class User implements UserInterface
     public function getTasksDone()
     {
         $tasksDone = [];
-        $allTasks = $this->getTasks();
-        foreach ($allTasks as $td) {
-            if ($td->getDone()) {
-                $tasksDone[] = $td;
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if ($tsk->getDone()) {
+                $tasksDone[] = $tsk;
             }
         }
         return $tasksDone;
