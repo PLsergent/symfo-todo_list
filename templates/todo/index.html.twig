@@ -6,4 +6,112 @@
 
 <h1>Todos</h1>
 <h2 class="lead">Personnal todo list</h2>
+
+<nav class="mt-5 mb-4">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-current-tab" data-toggle="tab" href="#nav-current" role="tab" aria-controls="nav-home" aria-selected="true">Current</a>
+        <a class="nav-item nav-link" id="nav-done-tab" data-toggle="tab" href="#nav-done" role="tab" aria-controls="nav-done" aria-selected="false">Done</a>
+    </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+
+    <!-- FIRST TAB CURRENT TODO -->
+
+    <div class="tab-pane fade show active" id="nav-current" role="tabpanel" aria-labelledby="nav-current-tab">
+        <h3 class="text-info">Todos</h3>
+
+        <table class="table table-striped" id="todos">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Deadline</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for todo in todos %}
+                <tr>
+                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.name }}</td>
+                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.description }}</td>
+                    <td>{{ todo.priority }}</td>
+                    <td>{{ todo.status }}</td>
+                    <td>{{ todo.deadline ? todo.deadline|date('d-m-Y') : '' }}</td>
+                    <td class="text-right">
+                        <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('todo_edit', {'id': todo.id, 'redirect': 'todo_index' }) }}">Show <i class="fas fa-eye"></i></button>
+                        <button class="btn btn-warning btn-sm delete-btn" data-url="{{ path('todo_delete', {'id': todo.id }) }}"><i class="far fa-minus-square"></i></button>
+                        <button class="btn btn-success btn-sm complete-btn" data-url="{{ path('todo_done', {'id': todo.id }) }}"><i class="far fa-check-circle"></i></button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">No todos found, please create one.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+<!-- SECOND TAB TODO DONE -->
+
+    <div class="tab-pane fade" id="nav-done" role="tabpanel" aria-labelledby="nav-done-tab">
+        <h3 class="text-secondary">Todos done</h3>
+
+        <table class="table table-striped" id="todos">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Deadline</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for todo in todos_done %}
+                <tr>
+                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.name }}</td>
+                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.description }}</td>
+                    <td>{{ todo.priority }}</td>
+                    <td>{{ todo.status }}</td>
+                    <td>{{ todo.deadline ? todo.deadline|date('d-m-Y') : '' }}</td>
+                    <td class="text-right">
+                        <button class="btn btn-sm btn-primary restore-btn" data-url="{{ path('todo_restore', {'id': todo.id }) }}">Restore <i class="fas fa-undo"></i></button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">No todos done, complete a todo first.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- MODAL onclick "show" display modal with update form -->
+
+<!-- Modal -->
+<div class="modal fade" id="editModalCenter" tabindex="-1" role="dialog" aria-labelledby="editModalCenter" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalCenter">Edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- FORM sync call with main_todo_task.js -->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('js/main_todo_task.js') }}"></script>
+
 {% endblock %}
