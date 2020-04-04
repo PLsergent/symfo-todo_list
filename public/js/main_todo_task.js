@@ -22,7 +22,7 @@
         $this = $(this);
         $.confirm({
             theme: 'supervan',
-            title: 'Todo completed',
+            title: 'Completed',
             content: 'Are you done with this?',
             buttons: {
                 Confirm: {
@@ -57,8 +57,8 @@
         $this = $(this);
         $.confirm({
             theme: 'supervan',
-            title: 'Delete todo',
-            content: 'Do you want to permanently delete this todo?',
+            title: 'Delete',
+            content: 'Do you want to permanently delete this?',
             buttons: {
                 Confirm: {
                     btnClass: 'btn-primary',

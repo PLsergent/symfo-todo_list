@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,10 +18,15 @@ class TaskController extends AbstractController
     /**
      * @Route("/", name="task_index", methods={"GET"})
      */
-    public function index()
+    public function index(UserRepository $userRepository)
     {
+        $user = $this->get('security.token_storage')
+                    ->getToken()
+                    ->getUser();
         return $this->render('task/index.html.twig', [
             'controller_name' => 'TaskController',
+            'tasks' => $userRepository->getCurrentTasksSortByDate($user),
+            'tasks_done' => $userRepository->getDoneTasksSortByDate($user),
         ]);
     }
 
