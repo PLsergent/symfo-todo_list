@@ -1,4 +1,0 @@
-{{ form_start(form, {'action': path('todo_edit', { 'id': todo.id, 'redirect': redirect })}) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-info submit-btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}

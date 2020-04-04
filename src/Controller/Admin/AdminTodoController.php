@@ -30,7 +30,10 @@ class AdminTodoController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $todo = new Todo();
+        $user = $this->get('security.token_storage')
+                    ->getToken()
+                    ->getUser();
+        $todo = new Todo($user);
         $form = $this->createForm(AdminTodoType::class, $todo);
         $form->handleRequest($request);
 

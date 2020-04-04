@@ -1,0 +1,4 @@
+{{ form_start(form, {'action': path('todo_new', { 'redirect': redirect })}) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-info submit-btn">Create Todo</button>
+{{ form_end(form) }}

@@ -8,7 +8,16 @@
         var url = $(this).attr('data-url');
 
         $.get(url, function(data) {
-            console.log(data)
+            $('.modal-title').text("Edit");
+            $('.modal-body').html(data);
+        })
+    });
+
+    $('.modal-new').on('click', function() {
+        var url = $(this).attr('data-url');
+
+        $.get(url, function(data) {
+            $('.modal-title').text("New");
             $('.modal-body').html(data);
         })
     });

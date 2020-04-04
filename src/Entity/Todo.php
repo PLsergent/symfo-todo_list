@@ -62,12 +62,13 @@ class Todo
         return $this->name;
     }
 
-    public function __construct()
+    public function __construct($user)
     {
         $this->categories = new ArrayCollection();
         $this->deadline = new \DateTime();
         $this->done = false;
         $this->status = "New";
+        $this->user = $user;
     }
 
     public function getId(): ?int

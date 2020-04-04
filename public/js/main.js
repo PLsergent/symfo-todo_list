@@ -18,7 +18,6 @@
 	  
 	$('#todos').DataTable({
 		"lengthMenu": [[5, 10, 15], [5, 10, 15]],
-		"order": [[ 4, "desc" ]],
 		"aoColumnDefs": [
 			{ "bSortable": false, "aTargets": 5 }, 
 		]
@@ -26,7 +25,6 @@
 
 	$('#tasks').DataTable({
 		"lengthMenu": [[5, 10, 15], [5, 10, 15]],
-		"order": [[ 4, "desc" ]],
 		"aoColumnDefs": [
 			{ "bSortable": false, "aTargets": 5 }, 
 		]

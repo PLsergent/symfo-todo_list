@@ -1,1 +1,4 @@
-{{ include('task/form/_form.html.twig', {'button_label': 'Update'}) }}
+{{ form_start(form, {'action': path('task_edit', { 'id': task.id, 'redirect': redirect })}) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-info submit-btn">Update</button>
+{{ form_end(form) }}

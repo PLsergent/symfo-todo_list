@@ -7,7 +7,11 @@
 <h1>Overview</h1>
 <h2 class="lead">A lightweight app to keep track of your todos and tasks.</h2>
 
-<nav class="mt-5 mb-4">
+<button class="btn btn-lg btn-primary modal-new mt-3" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('todo_new', {'redirect': 'home' }) }}">
+    New todo
+</button>
+
+<nav class="mt-3 mb-4">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-current-tab" data-toggle="tab" href="#nav-current" role="tab" aria-controls="nav-home" aria-selected="true">Current</a>
         <a class="nav-item nav-link" id="nav-done-tab" data-toggle="tab" href="#nav-done" role="tab" aria-controls="nav-done" aria-selected="false">Done</a>
@@ -54,8 +58,9 @@
             </tbody>
         </table>
         
-        <hr class="mb-5">
+        <hr class="mb-4">
         
+        <small>To add new Tasks please go to the 'Project' menu.</small>
         <h3 class="text-info">Tasks</h3>
         
         <table class="table table-striped" id="tasks">

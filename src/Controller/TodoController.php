@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Todo;
 use App\Form\TodoType;
+use App\Form\NewTodoType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +28,33 @@ class TodoController extends AbstractController
             'controller_name' => 'TodoController',
             'todos' => $userRepository->getCurrentTodosSortByDate($user),
             'todos_done' => $userRepository->getDoneTodosSortByDate($user),
+        ]);
+    }
+
+    /**
+     * @Route("/new/{redirect}", name="todo_new", methods={"GET","POST"})
+     */
+    public function new(Request $request, string $redirect): Response
+    {
+        $user = $this->get('security.token_storage')
+                    ->getToken()
+                    ->getUser();
+        $todo = new Todo($user);
+        $form = $this->createForm(NewTodoType::class, $todo);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($todo);
+            $entityManager->flush();
+
+            return $this->redirectToRoute($redirect);
+        }
+
+        return $this->render('todo/form/new.html.twig', [
+            'todo' => $todo,
+            'redirect' => $redirect,
+            'form' => $form->createView(),
         ]);
     }
 
