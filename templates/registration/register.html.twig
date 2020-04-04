@@ -6,10 +6,7 @@
     <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
+        {{ form_widget(registrationForm) }}
         <button class="btn btn-lg btn-primary">Register</button>
     {{ form_end(registrationForm) }}
     <p>Already have an account ? <a href="{{ path('app_login') }}">Please login.</a></p>

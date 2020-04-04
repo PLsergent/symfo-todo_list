@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Users</th>
+                <th>Project</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +20,8 @@
             <tr>
                 <td>{{ user_group.id }}</td>
                 <td>{{ user_group.name }}</td>
+                <td>Array</td>
+                <td>{{ user_group.project }}</td>
                 <td>
                     <a href="{{ path('admin_user_group_show', {'id': user_group.id}) }}">show</a>
                     <a href="{{ path('admin_user_group_edit', {'id': user_group.id}) }}">edit</a>

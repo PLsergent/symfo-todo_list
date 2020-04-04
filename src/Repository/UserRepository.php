@@ -51,7 +51,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
-        return $user->getTasksCurrent();
+        $currentTasks = $user->getTasksCurrent();
+
+        foreach($user->getUserGroups() as $group) {
+            $currentTasks = array_merge($currentTasks, $group->getTasksCurrent());
+        }
+
+        return $currentTasks;
     }
 
     public function getDoneTodosSortByDate(User $user)
@@ -69,7 +75,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
-        return $user->getTasksDone();
+        $currentTasks = $user->getTasksDone();
+
+        foreach($user->getUserGroups() as $group) {
+            $currentTasks = array_merge($currentTasks, $group->getTasksDone());
+        }
+
+        return $currentTasks;
     }
 
     // /**

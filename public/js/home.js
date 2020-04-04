@@ -13,12 +13,12 @@
         })
     });
 
-    $(".modal").on('click', '.submit-todo', function(e) {
+    $(".modal").on('click', '.submit-btn', function(e) {
         e.preventDefault();
         $(this).closest("form").submit();
     });
 
-    $('.complete-todo').on('click', function() {
+    $('.complete-btn').on('click', function() {
         $this = $(this);
         $.confirm({
             theme: 'supervan',
@@ -42,7 +42,7 @@
         });
     })
 
-    $('.restore-todo').on('click', function() {
+    $('.restore-btn').on('click', function() {
         $this = $(this);
         var url = $(this).attr('data-url');
 
@@ -53,7 +53,7 @@
         });
     });
 
-    $('.delete-todo').on('click', function() {
+    $('.delete-btn').on('click', function() {
         $this = $(this);
         $.confirm({
             theme: 'supervan',

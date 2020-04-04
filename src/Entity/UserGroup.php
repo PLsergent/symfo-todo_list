@@ -24,7 +24,7 @@ class UserGroup
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="userGroups")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="userGroups")
      */
     private $users;
 
@@ -99,6 +99,30 @@ class UserGroup
     public function getTasks(): Collection
     {
         return $this->tasks;
+    }
+
+    public function getTasksCurrent()
+    {
+        $tasks = [];
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if (!$tsk->getDone()) {
+                $tasks[] = $tsk;
+            }
+        }
+        return $tasks;
+    }
+
+    public function getTasksDone()
+    {
+        $tasksDone = [];
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if ($tsk->getDone()) {
+                $tasksDone[] = $tsk;
+            }
+        }
+        return $tasksDone;
     }
 
     public function addTask(Task $task): self

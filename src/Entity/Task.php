@@ -49,7 +49,7 @@ class Task
     private $done;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="tasks")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="tasks")
      */
     private $users;
 

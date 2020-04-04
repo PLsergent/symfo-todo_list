@@ -56,13 +56,13 @@ class User implements UserInterface
     private $todos;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Task", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Task", mappedBy="users")
      * @ORM\OrderBy({"deadline" = "ASC", "id" = "DESC"})
      */
     private $tasks;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\UserGroup", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\UserGroup", mappedBy="users")
      */
     private $userGroups;
 
