@@ -42,10 +42,11 @@ class UserGroup
         return $this->name;
     }
 
-    public function __construct()
+    public function __construct($project)
     {
         $this->users = new ArrayCollection();
         $this->tasks = new ArrayCollection();
+        $this->project = $project;
     }
 
     public function getId(): ?int

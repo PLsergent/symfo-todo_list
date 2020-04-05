@@ -55,6 +55,7 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\UserGroup", inversedBy="tasks")
+     * @ORM\JoinColumn(name="user_group_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $userGroup;
 
@@ -65,6 +66,7 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="tasks")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $project;
 

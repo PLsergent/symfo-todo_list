@@ -55,7 +55,7 @@
                 </a>
                 <a class="btn btn-secondary ml-2" data-toggle="collapse" href="#usergroups" role="button" aria-expanded="false" aria-controls="usergroups">
                     User groups
-                </a><button class="btn btn-primary ml-1">Add group <i class="fas fa-plus"></i></button>
+                </a><button class="btn btn-primary ml-1 modal-new" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('user_group_new', {'id': proj.id, 'redirect': 'project_index' }) }}">Add group <i class="fas fa-plus"></i></button>
 
                 <button class="btn btn-warning modal-new" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_new', {'id': proj.id, 'redirect': 'project_index' }) }}">
                     New task <i class="far fa-calendar-plus"></i>
@@ -77,13 +77,21 @@
             <div class="collapse" id="usergroups">
                 <div class="card card-body text-dark">
                     <h6 class="card-title">User groups</h6>
-                    {% for ug in proj.UserGroups %}
-                        <span>{{ ug }} : {% for u in ug.users %} {% if loop.last %} {{ u }} {% else %} {{ u }}, {% endif %} {% endfor %}</span> 
-                    {% endfor %}
+                    {% if proj.UserGroups is not empty %}
+                        {% for ug in proj.UserGroups %}
+                            <span><button class="btn btn-sm delete-btn" data-url="{{ path('user_group_delete', {'id': proj.id }) }}"><i class="fas fa-times"></i></button>
+                                <button class="btn btn-sm btn-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('user_group_edit', {'id': ug.id, 'redirect': 'project_index' }) }}">
+                                    {{ ug }} : {% for u in ug.users %} {% if loop.last %} {{ u }} {% else %} {{ u }}, {% endif %} {% endfor %}
+                                </button>
+                            </span> 
+                        {% endfor %}
+                    {% else %}
+                            No user group.
+                    {% endif %}
                 </div>
             </div>
 
-            <h3 class="text-info">Tasks</h3>
+            <h3 class="text-info mt-3">Tasks</h3>
             
             <table class="table table-striped tasks">
                 <thead>
@@ -107,7 +115,7 @@
                             <td>{{ task.deadline ? task.deadline|date('d-m-Y') : '' }}</td>
                             <td class="text-right">
                                 {% if task.project.manager == app.user %}
-                                    <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_edit', {'id': task.id, 'redirect': 'home' }) }}">Show <i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_edit', {'id': task.id, 'redirect': 'project_index' }) }}">Show <i class="fas fa-eye"></i></button>
                                     <button class="btn btn-warning btn-sm delete-btn" data-url="{{ path('task_delete', {'id': task.id }) }}"><i class="far fa-minus-square"></i></button>
                                 {% endif %}
                                 <button class="btn btn-success btn-sm complete-btn" data-url="{{ path('task_done', {'id': task.id }) }}"><i class="far fa-check-circle"></i></button>
@@ -187,7 +195,7 @@
                             <td>{{ task.deadline ? task.deadline|date('d-m-Y') : '' }}</td>
                             <td class="text-right">
                                 {% if task.project.manager == app.user %}
-                                    <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_edit', {'id': task.id, 'redirect': 'home' }) }}">Show <i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_edit', {'id': task.id, 'redirect': 'project_index' }) }}">Show <i class="fas fa-eye"></i></button>
                                     <button class="btn btn-warning btn-sm delete-btn" data-url="{{ path('task_delete', {'id': task.id }) }}"><i class="far fa-minus-square"></i></button>
                                 {% endif %}
                                 <button class="btn btn-success btn-sm complete-btn" data-url="{{ path('task_done', {'id': task.id }) }}"><i class="far fa-check-circle"></i></button>
