@@ -30,11 +30,13 @@ class Category
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Task", mappedBy="categories")
+     * @ORM\OrderBy({"deadline" = "ASC", "id" = "DESC"})
      */
     private $tasks;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Todo", mappedBy="categories")
+     * @ORM\OrderBy({"deadline" = "ASC", "id" = "DESC"})
      */
     private $todos;
 
@@ -44,6 +46,7 @@ class Category
 
     public function __construct()
     {
+        $this->color = "#494CA2";
         $this->tasks = new ArrayCollection();
         $this->todos = new ArrayCollection();
     }
@@ -85,6 +88,42 @@ class Category
         return $this->tasks;
     }
 
+    public function getTasksPerUser($user)
+    {
+        $tasks = [];
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if ($tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user)) {
+                $tasks[] = $tsk;
+            }
+        }
+        return $tasks;
+    }
+
+    public function getTasksCurrentPerUser($user)
+    {
+        $tasks = [];
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if (!$tsk->getDone() && ( $tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user) )) {
+                $tasks[] = $tsk;
+            }
+        }
+        return $tasks;
+    }
+
+    public function getTasksDonePerUser($user)
+    {
+        $tasks = [];
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if ($tsk->getDone() && in_array($user, $tsk->getUsers()->toArray())) {
+                $tasks[] = $tsk;
+            }
+        }
+        return $tasks;
+    }
+
     public function addTask(Task $task): self
     {
         if (!$this->tasks->contains($task)) {
@@ -108,9 +147,45 @@ class Category
     /**
      * @return Collection|Todo[]
      */
-    public function getTodos(): Collection
+    public function getTodos():Collection
     {
         return $this->todos;
+    }
+
+    public function getTodosPerUser($user)
+    {
+        $todos = [];
+        $allTodos = $this->todos;
+        foreach ($allTodos as $td) {
+            if ($user == $td->getUser()) {
+                $todos[] = $td;
+            }
+        }
+        return $todos;
+    }
+
+    public function getTodosCurrentPerUser($user)
+    {
+        $todos = [];
+        $allTodos = $this->todos;
+        foreach ($allTodos as $td) {
+            if (!$td->getDone() && $user == $td->getUser()) {
+                $todos[] = $td;
+            }
+        }
+        return $todos;
+    }
+
+    public function getTodosDonePerUser($user)
+    {
+        $todos = [];
+        $allTodos = $this->todos;
+        foreach ($allTodos as $td) {
+            if ($td->getDone() && $user == $td->getUser()) {
+                $todos[] = $tsk;
+            }
+        }
+        return $todos;
     }
 
     public function addTodo(Todo $todo): self

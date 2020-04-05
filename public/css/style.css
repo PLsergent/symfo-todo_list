@@ -4043,8 +4043,8 @@ input[type="button"].btn-block {
 .page-item.active .page-link {
   z-index: 1;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff; }
+  background-color: #626591;
+  border-color: #626591; }
 
 .page-item.disabled .page-link {
   color: #6c757d;
