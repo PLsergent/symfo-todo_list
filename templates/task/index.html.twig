@@ -23,7 +23,7 @@
     <div class="tab-pane fade show active" id="nav-current" role="tabpanel" aria-labelledby="nav-current-tab">
         <h3 class="text-info">Tasks</h3>
         
-        <table class="table table-striped" id="tasks">
+        <table class="table table-striped tasks">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -64,7 +64,7 @@
     <div class="tab-pane fade" id="nav-done" role="tabpanel" aria-labelledby="nav-done-tab">        
         <h3 class="text-secondary">Tasks done</h3>
         
-        <table class="table table-striped nowrap" id="tasks">
+        <table class="table table-striped nowrap tasks">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -111,11 +111,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- FORM sync call with main_todo_task.js -->
+                <!-- FORM sync call with main_modal.js -->
             </div>
         </div>
     </div>
 </div>
-<script src="{{ asset('js/main_todo_task.js') }}"></script>
+<script src="{{ asset('js/main_modal.js') }}"></script>
 
 {% endblock %}

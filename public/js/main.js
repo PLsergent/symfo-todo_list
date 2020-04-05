@@ -16,14 +16,7 @@
       $('#sidebar').toggleClass('active');
 	  });
 	  
-	$('#todos').DataTable({
-		"lengthMenu": [[5, 10, 15], [5, 10, 15]],
-		"aoColumnDefs": [
-			{ "bSortable": false, "aTargets": 5 }, 
-		]
-	});
-
-	$('#tasks').DataTable({
+	$('table').DataTable({
 		"lengthMenu": [[5, 10, 15], [5, 10, 15]],
 		"aoColumnDefs": [
 			{ "bSortable": false, "aTargets": 5 }, 

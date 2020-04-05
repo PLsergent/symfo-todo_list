@@ -25,7 +25,7 @@
     <div class="tab-pane fade show active" id="nav-current" role="tabpanel" aria-labelledby="nav-current-tab">
         <h3 class="text-info">Todos</h3>
 
-        <table class="table table-striped" id="todos">
+        <table class="table table-striped todos">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -39,8 +39,8 @@
             <tbody>
             {% for todo in todos %}
                 <tr>
-                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.name }}</td>
-                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.description }}</td>
+                    <td class="text-truncate" style="max-width: 200px;">{{ todo.name }}</td>
+                    <td class="text-truncate" style="max-width: 200px;">{{ todo.description }}</td>
                     <td>{{ todo.priority }}</td>
                     <td>{{ todo.status }}</td>
                     <td>{{ todo.deadline ? todo.deadline|date('d-m-Y') : '' }}</td>
@@ -64,7 +64,7 @@
     <div class="tab-pane fade" id="nav-done" role="tabpanel" aria-labelledby="nav-done-tab">
         <h3 class="text-secondary">Todos done</h3>
 
-        <table class="table table-striped" id="todos">
+        <table class="table table-striped todos">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -78,8 +78,8 @@
             <tbody>
             {% for todo in todos_done %}
                 <tr>
-                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.name }}</td>
-                    <td class="text-truncate"  style="max-width: 200px;">{{ todo.description }}</td>
+                    <td class="text-truncate" style="max-width: 200px;">{{ todo.name }}</td>
+                    <td class="text-truncate" style="max-width: 200px;">{{ todo.description }}</td>
                     <td>{{ todo.priority }}</td>
                     <td>{{ todo.status }}</td>
                     <td>{{ todo.deadline ? todo.deadline|date('d-m-Y') : '' }}</td>
@@ -111,11 +111,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- FORM sync call with main_todo_task.js -->
+                <!-- FORM sync call with main_modal.js -->
             </div>
         </div>
     </div>
 </div>
-<script src="{{ asset('js/main_todo_task.js') }}"></script>
+<script src="{{ asset('js/main_modal.js') }}"></script>
 
 {% endblock %}

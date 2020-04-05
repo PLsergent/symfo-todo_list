@@ -104,6 +104,19 @@ class ProjectRepository extends ServiceEntityRepository
         return $projectsTasks;
     }
 
+    public function getUsersProject()
+    {
+        $projectsUsers = [];
+        $allProjects = $this->findAll();
+
+        foreach ($allProjects as $project) {
+            $users = $project->getUsersProject();
+            if (!empty($users)) {
+                $projectsUsers[$project->getId()] = $users;
+            }
+        }
+        return $projectsUsers; 
+    }
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

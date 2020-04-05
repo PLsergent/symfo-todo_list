@@ -42,10 +42,11 @@ class Project
         return $this->name;
     }
 
-    public function __construct()
+    public function __construct($user)
     {
         $this->userGroups = new ArrayCollection();
         $this->tasks = new ArrayCollection();
+        $this->manager = $user;
     }
 
     public function getId(): ?int
@@ -75,6 +76,26 @@ class Project
         $this->manager = $manager;
 
         return $this;
+    }
+
+    public function getUsersProject()
+    {
+        $users = [];
+        foreach($this->tasks as $tsk) {
+            if (!empty($tsk->getUserGroup())) {
+                foreach($tsk->getUserGroup()->getUsers() as $user) {
+                    if (!in_array($user, $users)) {
+                        $users[] = $user;
+                    } 
+                }
+            }
+            foreach($tsk->getUsers() as $user) {
+                if (!in_array($user, $users)) {
+                    $users[] = $user;
+                }
+            }
+        }
+        return $users;
     }
 
     /**
