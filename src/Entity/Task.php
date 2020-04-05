@@ -72,13 +72,14 @@ class Task
         return $this->name;
     }
 
-    public function __construct()
+    public function __construct($project)
     {
         $this->users = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->deadline = new \DateTime();
         $this->done = false;
         $this->status = "New";
+        $this->project = $project;
     }
 
     public function getId(): ?int

@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Entity\Project;
 use App\Form\TaskType;
+use App\Form\NewTaskType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,6 +29,31 @@ class TaskController extends AbstractController
             'controller_name' => 'TaskController',
             'tasks' => $userRepository->getCurrentTasksSortByDate($user),
             'tasks_done' => $userRepository->getDoneTasksSortByDate($user),
+        ]);
+    }
+
+    /**
+     * @Route("/new/{id}/{redirect}", name="task_new", methods={"GET","POST"})
+     */
+    public function new(Request $request, Project $project, string $redirect): Response
+    {
+        $task = new Task($project);
+        $form = $this->createForm(NewTaskType::class, $task);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($task);
+            $entityManager->flush();
+
+            return $this->redirectToRoute($redirect);
+        }
+
+        return $this->render('task/form/new.html.twig', [
+            'task' => $task,
+            'project' => $project,
+            'redirect' => $redirect,
+            'form' => $form->createView(),
         ]);
     }
 
