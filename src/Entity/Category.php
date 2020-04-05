@@ -117,7 +117,7 @@ class Category
         $tasks = [];
         $allTasks = $this->tasks;
         foreach ($allTasks as $tsk) {
-            if ($tsk->getDone() && in_array($user, $tsk->getUsers()->toArray())) {
+            if ($tsk->getDone() && $tsk->getUsers()->contains($user)) {
                 $tasks[] = $tsk;
             }
         }

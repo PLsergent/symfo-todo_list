@@ -116,6 +116,52 @@ class Project
         return $this->tasks;
     }
 
+    public function getTasksManagerCurrent()
+    {
+        $tasks = [];
+        foreach($this->tasks as $tsk) {
+            if (!$tsk->getDone()) {
+                $tasks[] = $tsk; 
+            }
+        }
+        return $tasks;
+    }
+
+    public function getTasksManagerDone()
+    {
+        $tasks = [];
+        foreach($this->tasks as $tsk) {
+            if ($tsk->getDone()) {
+                $tasks[] = $tsk; 
+            }
+        }
+        return $tasks;
+    }
+
+    public function getTasksUserCurrent($user)
+    {
+        $tasks = [];
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if (!$tsk->getDone() && ( $tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user) )) {
+                $tasks[] = $tsk;
+            }
+        }
+        return $tasks;
+    }
+
+    public function getTasksUserDone($user)
+    {
+        $tasks = [];
+        $allTasks = $this->tasks;
+        foreach ($allTasks as $tsk) {
+            if ($tsk->getDone() && ( $tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user) )) {
+                $tasks[] = $tsk;
+            }
+        }
+        return $tasks;
+    }
+
     public function addTask(Task $task): self
     {
         if (!$this->tasks->contains($task)) {
