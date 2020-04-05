@@ -15,9 +15,17 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         {% for cat in categories %}
             {% if loop.first %}
-                <a class="nav-item nav-link active" id="nav-{{ cat.name }}-tab" data-toggle="tab" href="#nav-{{ cat.name }}" role="tab" aria-controls="nav-{{ cat.name }}" aria-selected="true">{{ cat.name }}</a>
+                <a class="nav-item nav-link active pr-1" id="nav-{{ cat.name }}-tab" data-toggle="tab" href="#nav-{{ cat.name }}" role="tab" aria-controls="nav-{{ cat.name }}" aria-selected="true">
+                    {{ cat.name }} 
+                    <button class="btn btn-sm pr-0 modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('category_edit', {'id': cat.id, 'redirect': 'category_index' }) }}"><i class="fas fa-cogs"></i></button>
+                    <button class="btn btn-sm pl-1 delete-btn" data-url="{{ path('category_delete', {'id': cat.id }) }}"><i class="fas fa-trash text-danger"></i></button>
+                </a>
             {% else %}
-                <a class="nav-item nav-link" id="nav-{{ cat.name }}-tab" data-toggle="tab" href="#nav-{{ cat.name }}" role="tab" aria-controls="nav-{{ cat.name }}" aria-selected="false">{{ cat.name }}</a>
+                <a class="nav-item nav-link" id="nav-{{ cat.name }}-tab" data-toggle="tab" href="#nav-{{ cat.name }}" role="tab" aria-controls="nav-{{ cat.name }}" aria-selected="false">
+                    {{ cat.name }}
+                    <button class="btn btn-sm pr-0 modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('category_edit', {'id': cat.id, 'redirect': 'category_index' }) }}"><i class="fas fa-cogs"></i></button>
+                    <button class="btn btn-sm pl-1 delete-btn" data-url="{{ path('category_delete', {'id': cat.id }) }}"><i class="fas fa-trash text-danger"></i></button>
+                </a>
             {% endif %}
         {% endfor %}
     </div>
