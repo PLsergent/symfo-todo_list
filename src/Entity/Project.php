@@ -142,8 +142,13 @@ class Project
     {
         $tasks = [];
         $allTasks = $this->tasks;
+
         foreach ($allTasks as $tsk) {
-            if (!$tsk->getDone() && ( $tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user) )) {
+            if (empty($tsk->getUserGroup())) {
+                if (!$tsk->getDone() && ( $tsk->getUsers()->contains($user) )) {
+                    $tasks[] = $tsk;
+                }
+            } else if (!$tsk->getDone() && ( $tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user) )) {
                 $tasks[] = $tsk;
             }
         }
@@ -154,8 +159,13 @@ class Project
     {
         $tasks = [];
         $allTasks = $this->tasks;
+
         foreach ($allTasks as $tsk) {
-            if ($tsk->getDone() && ( $tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user) )) {
+            if (empty($tsk->getUserGroup())) {
+                if ($tsk->getDone() && ( $tsk->getUsers()->contains($user) )) {
+                    $tasks[] = $tsk;
+                }
+            } else if ($tsk->getDone() && ( $tsk->getUsers()->contains($user) || $tsk->getUserGroup()->getUsers()->contains($user) )) {
                 $tasks[] = $tsk;
             }
         }

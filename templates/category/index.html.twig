@@ -49,8 +49,8 @@
                 </tr>
             </thead>
             <tbody>
-            {% if todos[cat.name] is defined %}
-                {% for todo in todos[cat.name] %}
+            {% if todos[cat.id] is defined %}
+                {% for todo in todos[cat.id] %}
                     <tr>
                         <td class="text-truncate"  style="max-width: 200px;">{{ todo.name }}</td>
                         <td class="text-truncate"  style="max-width: 200px;">{{ todo.description }}</td>
@@ -89,8 +89,8 @@
                 </tr>
             </thead>
             <tbody>
-            {% if tasks[cat.name] is defined %}
-                {% for task in tasks[cat.name] %}
+            {% if tasks[cat.id] is defined %}
+                {% for task in tasks[cat.id] %}
                     <tr>
                         <td class="text-truncate"  style="max-width: 200px;">{{ task.name }}</td>
                         <td class="text-truncate"  style="max-width: 200px;">{{ task.description }}</td>

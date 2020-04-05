@@ -44,7 +44,7 @@
                     <td>{{ task.deadline ? task.deadline|date('d-m-Y') : '' }}</td>
                     <td class="text-right">
                         {% if task.project.manager == app.user %}
-                            <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_edit', {'id': task.id, 'redirect': 'home' }) }}">Show <i class="fas fa-eye"></i></button>
+                            <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_edit', {'id': task.id, 'redirect': 'task_index' }) }}">Show <i class="fas fa-eye"></i></button>
                             <button class="btn btn-warning btn-sm delete-btn" data-url="{{ path('task_delete', {'id': task.id }) }}"><i class="far fa-minus-square"></i></button>
                         {% endif %}
                         <button class="btn btn-success btn-sm complete-btn" data-url="{{ path('task_done', {'id': task.id }) }}"><i class="far fa-check-circle"></i></button>

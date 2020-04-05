@@ -42,7 +42,7 @@ class CategoryRepository extends ServiceEntityRepository
         foreach ($allCategories as $category) {
             $currentTodos = $category->getTodosCurrentPerUser($user);
             if (!empty($currentTodos)) {
-                $categoriesTodos[$category->getName()] = $currentTodos;
+                $categoriesTodos[$category->getId()] = $currentTodos;
             }
         }
         return $categoriesTodos;
@@ -56,7 +56,7 @@ class CategoryRepository extends ServiceEntityRepository
         foreach ($allCategories as $category) {
             $currentTasks = $category->getTasksCurrentPerUser($user);
             if (!empty($currentTasks)) {
-                $categoriesTasks[$category->getName()] = $currentTasks;
+                $categoriesTasks[$category->getId()] = $currentTasks;
             }
         }
         return $categoriesTasks;

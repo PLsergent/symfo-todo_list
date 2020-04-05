@@ -38,11 +38,60 @@
 <div class="tab-content" id="nav-tabContent">
 
     {% for proj in projects %}
+
+    <!-- PANE : LIST OF PROJECTS-->
+    
     <div class="tab-pane fade show {% if loop.first %}active{% endif %}" id="nav-{{ proj.id }}" role="tabpanel" aria-labelledby="nav-{{ proj.id }}-tab">
+        
         {% if app.user == proj.manager %}
+
+        <!-- IF THE USER IS MANAGER OF THIS PROJECT -->
+
             <small>You are manager of this project.</small>
 
+            <h3 class="text-info">Tasks</h3>
+            
+            <table class="table table-striped" id="tasks">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Deadline</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% if tasks_manager[proj.id] is defined %}
+                    {% for task in tasks_manager[proj.id] %}
+                        <tr>
+                            <td class="text-truncate"  style="max-width: 200px;">{{ task.name }}</td>
+                            <td class="text-truncate"  style="max-width: 200px;">{{ task.description }}</td>
+                            <td>{{ task.priority }}</td>
+                            <td>{{ task.status }}</td>
+                            <td>{{ task.deadline ? task.deadline|date('d-m-Y') : '' }}</td>
+                            <td class="text-right">
+                                {% if task.project.manager == app.user %}
+                                    <button class="btn btn-primary btn-sm text-light modal-edit" data-toggle="modal" data-target="#editModalCenter" data-url="{{ path('task_edit', {'id': task.id, 'redirect': 'home' }) }}">Show <i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-warning btn-sm delete-btn" data-url="{{ path('task_delete', {'id': task.id }) }}"><i class="far fa-minus-square"></i></button>
+                                {% endif %}
+                                <button class="btn btn-success btn-sm complete-btn" data-url="{{ path('task_done', {'id': task.id }) }}"><i class="far fa-check-circle"></i></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="8">No tasks found, please create one.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
         {% else %}
+
+        <!-- IF THE USER IS NOT MANAGER OF THIS PROJECT -->
+
             <h3 class="text-info">Tasks</h3>
             
             <table class="table table-striped" id="tasks">
