@@ -25,6 +25,7 @@ class Project
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="projects")
+     * @ORM\JoinColumn(name="manager_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $manager;
 
